@@ -1,0 +1,40 @@
+/**
+*  测试3208LED点阵屏
+**/
+#include <Arduino.h>
+#include <HT1632_3208.h>
+
+QXC_HT1632_3208LEDMatrix LED3208display = QXC_HT1632_3208LEDMatrix(11, 13, 4);
+
+int count = 0;
+
+void setup()
+{
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  LED3208display.begin();
+  LED3208display.clearScreen();
+}
+
+void loop()
+{
+
+  digitalWrite(5, LOW);
+  digitalWrite(6, LOW);
+
+  if (count % 2 == 1)
+  {
+    LED3208display.fillRect(0, 0, 32, 8, 1);
+    digitalWrite(5, HIGH);
+  }
+  else
+  {
+    LED3208display.drawRect(0, 0, 32, 8, 1);
+    digitalWrite(6, HIGH);
+  }
+  LED3208display.writeScreen();
+  delay(100);
+  LED3208display.clearScreen();
+  delay(1000);
+  count += 1;
+}

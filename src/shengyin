@@ -1,0 +1,36 @@
+/**
+*  测试3208LED点阵屏
+*  测试麦克风
+**/
+
+#include <HT1632_3208.h>
+
+QXC_HT1632_3208LEDMatrix LED3208 = QXC_HT1632_3208LEDMatrix(11, 13, 4);
+int val = 0;
+int v1 = 0;
+int v2 = 0;
+int v3 = 0;
+
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(A0, INPUT);
+    LED3208.begin();
+}
+
+void loop()
+{
+    val = analogRead(A0);
+    Serial.println(val);
+    v1 = val / 100;
+    v2 = val / 10 % 10;
+    v3 = val % 10;
+
+    LED3208.clearScreen();
+    LED3208.drawChar(0, 0, v1 + 48, 1, 0, 1);
+    LED3208.drawChar(8, 0, v2 + 48, 1, 0, 1);
+    LED3208.drawChar(16, 0, v3 + 48, 1, 0, 1);
+    LED3208.writeScreen();
+
+    delay(100);
+}
