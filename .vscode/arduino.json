@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "output": "bin",
-    "sketch": "source\\FFT.ino",
+    "sketch": "src\\FFT.ino",
     "port": "COM5"
 }
